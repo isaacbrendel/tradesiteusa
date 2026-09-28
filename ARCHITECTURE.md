@@ -1,6 +1,6 @@
 # Architecture
 
-High-level only. Enough for a technical recruiter or hiring manager. Not a rebuild guide.
+High-level only. Not a rebuild guide.
 
 ## Surfaces
 
