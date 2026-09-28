@@ -43,5 +43,3 @@
 
 - `@xenova/transformers` browser classifier demos
 - Rust → WASM ontology spike for graph experiments
-
-Call these R&D in interviews unless you have production load on them.

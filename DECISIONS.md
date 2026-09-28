@@ -1,6 +1,6 @@
 # Engineering decisions
 
-Short notes on choices that show how the product thinks. Useful interview fodder.
+Short notes on choices that show how the product thinks.
 
 ## 1. Server-enforced voice workflow
 
@@ -38,7 +38,7 @@ Short notes on choices that show how the product thinks. Useful interview fodder
 
 **Choice:** Production stays private. This write-up + live demos prove the work.
 
-**Why:** Opening the repo would leak tenants, prompts, rate books, and ops data. Recruiters need evidence of judgment and shipping, not a cloneable SaaS.
+**Why:** Opening the repo would leak tenants, prompts, rate books, and ops data. The write-up and live demos are the public proof of judgment and shipping.
 
 ## 7. Vertical depth over generic CMS
 
