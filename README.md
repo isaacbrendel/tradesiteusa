@@ -65,7 +65,11 @@ Details: [STACK.md](./STACK.md) · Architecture: [ARCHITECTURE.md](./ARCHITECTUR
 
 Night Line maps a shop DID to tenant config, runs tool webhooks for leads / windows / hours / owner ping, and stores calls and leads in Postgres.
 
-Call flow is **server-enforced**: `greet → qualify → propose → confirm`. Booking modes (`autonomous` / `qualify` / `assist`) gate whether the model can propose a look. Webhooks are HMAC-verified. Golden evals cover the workflow.
+Call flow is **server-enforced**: `greet → qualify → propose → confirm`. Booking modes (`autonomous` / `qualify` / `assist`) gate whether the model can lock a window. Only `autonomous` may lock one. `qualify` and `assist` capture a preference and leave the confirm with the owner.
+
+Post-call webhooks are HMAC-SHA256 over `timestamp.rawBody`, compared with a timing-safe equal, and rejected when the timestamp is outside tolerance. Initiation and in-call tool webhooks check a shared secret, not HMAC. Stripe webhooks are a separate signature check.
+
+Golden evals are deterministic tests in the voice suite, not live model calls. They fail if the Night Line prompt drops a required contract, or if a workflow gate allows an illegal transition.
 
 ### 2. Bid desk with a hard human gate
 

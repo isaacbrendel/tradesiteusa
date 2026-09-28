@@ -27,8 +27,8 @@ High-level only. Enough for a technical recruiter or hiring manager. Not a rebui
 1. Twilio / ElevenLabs hits an initiation webhook with the called DID.
 2. Control plane resolves shop config and returns agent context.
 3. During the call, tool webhooks ask for windows, hours, KB, or owner ping.
-4. Workflow state machine allows or blocks propose / confirm by mode.
-5. Post-call ingest (HMAC) writes call + lead + contact thread rows.
+4. Workflow state machine allows or blocks propose / confirm by mode. Only `autonomous` may lock a window.
+5. Post-call ingest checks HMAC, then writes call + lead + contact thread rows. Initiation and tool webhooks check a shared secret before they run.
 
 ## Bid path
 
@@ -47,7 +47,7 @@ High-level only. Enough for a technical recruiter or hiring manager. Not a rebui
 ## Trust boundaries
 
 - Public routes never see raw secrets or tenant voice credentials.
-- Voice and Stripe webhooks verify signatures before mutating state.
+- Post-call voice webhooks check HMAC before writes. Initiation and tool webhooks check a shared secret. Stripe webhooks check their own signatures.
 - Client analytics events strip PII patterns before store / fan-out.
 - Owner board and MCP are gated (pin / OAuth), not public JSON dumps.
 
